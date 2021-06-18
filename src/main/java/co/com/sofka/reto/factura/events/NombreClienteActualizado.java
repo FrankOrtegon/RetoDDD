@@ -14,4 +14,12 @@ public class NombreClienteActualizado extends DomainEvent {
         this.clienteID = clienteID;
         this.nombre = nombre;
     }
+
+    public ClienteID getClienteID() {
+        return clienteID;
+    }
+
+    public Nombre getNombre() {
+        return nombre;
+    }
 }

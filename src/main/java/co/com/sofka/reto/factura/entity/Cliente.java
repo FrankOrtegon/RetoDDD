@@ -6,6 +6,7 @@ import co.com.sofka.reto.valuegeneric.Nombre;
 import co.com.sofka.reto.valuegeneric.Telefono;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class Cliente extends Entity<ClienteID> {
 
@@ -34,4 +35,6 @@ public class Cliente extends Entity<ClienteID> {
     public Telefono telefono() {
         return telefono;
     }
+
+
 }
