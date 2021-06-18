@@ -19,7 +19,7 @@ public class Procedimiento extends Entity<ProcedimientoID> {
         this.valorProcedimiento = valorProcedimiento;
     }
 
-    public void actualizarDescripcion(ProcedimientoID descripcionProcedimiento) {
+    public void actualizarDescripcion(DescripcionProcedimiento descripcionProcedimiento) {
         this.descripcionProcedimiento = Objects.requireNonNull(descripcionProcedimiento);
     }
 

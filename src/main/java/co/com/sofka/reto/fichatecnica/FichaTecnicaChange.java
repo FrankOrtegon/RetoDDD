@@ -27,7 +27,7 @@ public class FichaTecnicaChange extends EventChange {
         apply((DescripcionProcedimientoActualizada event) -> {
            var procedimiento = fichaTecnica.getProcedimientoPorID(event.getProcedimientoID())
                    .orElseThrow(() -> new IllegalArgumentException("No se encuentra el procedimiento"));
-           procedimiento.actualizarDescripcion(event.getProcedimientoID());
+           procedimiento.actualizarDescripcion(event.getdescripcionProcedimiento());
         });
 
         apply((MecanicoAgregado event) -> {
