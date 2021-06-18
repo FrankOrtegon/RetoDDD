@@ -1,12 +1,13 @@
 package co.com.sofka.reto.fichatecnica;
 
 import co.com.sofka.domain.generic.EventChange;
+
 import co.com.sofka.reto.fichatecnica.entity.Mecanico;
 import co.com.sofka.reto.fichatecnica.event.*;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.function.Function;
+
 
 public class FichaTecnicaChange extends EventChange {
 
@@ -16,7 +17,7 @@ public class FichaTecnicaChange extends EventChange {
             fichaTecnica.estado = event.getEstado();
             fichaTecnica.fichaTecnicaID = event.getFichaTecnicaID();
             fichaTecnica.procedimientos = new HashSet<>();
-            fichaTecnica.productos = new ArrayList<>();
+
 
         });
 
@@ -55,11 +56,14 @@ public class FichaTecnicaChange extends EventChange {
             telefono.cambiarTelefono(event.getTelefono());
         });
 
-        apply((ReferenciaProductoAgregada event) ->{
-            var producto = fichaTecnica.getProductoPorID(event.getProductoID())
-                    .orElseThrow(() -> new IllegalArgumentException("No se encuentra el producto"));
-            producto.agregarReferenciaProducto(event.getTipoProducto());
+        apply((MarcaVehiculoActualizado event) -> {
+            fichaTecnica.vehiculo.actualizarMarca(event.getMarca());
         });
+
+        apply((ModeloVehiculoActualizado event) -> {
+            fichaTecnica.vehiculo.actualizarModelo(event.getModelo());
+        });
+
 
     }
 }

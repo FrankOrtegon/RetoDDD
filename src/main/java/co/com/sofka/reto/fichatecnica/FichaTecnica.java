@@ -4,7 +4,7 @@ import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.reto.fichatecnica.entity.Mecanico;
 import co.com.sofka.reto.fichatecnica.entity.Procedimiento;
-import co.com.sofka.reto.fichatecnica.entity.Producto;
+import co.com.sofka.reto.fichatecnica.entity.Vehiculo;
 import co.com.sofka.reto.fichatecnica.event.*;
 import co.com.sofka.reto.fichatecnica.value.*;
 import co.com.sofka.reto.valuegeneric.Nombre;
@@ -17,12 +17,15 @@ import java.util.Set;
 
 public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
 
+    public VehiculoID vehiculoID;
+    public Marca marca;
     public FichaTecnicaID fichaTecnicaID;
+    public Vehiculo vehiculo;
     protected Estado estado;
     protected Set<Mecanico> mecanico;
-    protected List<Producto> productos;
     protected Set<Procedimiento> procedimientos;
     protected FacturaID facturaID;
+
 
     public FichaTecnica(FichaTecnicaID fichaTecnicaID, Estado estado) {
         super(fichaTecnicaID);
@@ -54,12 +57,6 @@ public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
                 .findFirst();
     }
 
-    protected Optional<Producto> getProductoPorID(ProductoID productoID) {
-        return  productos()
-                .stream()
-                .filter(producto -> producto.identity().equals(productoID))
-                .findFirst();
-    }
 
     public void agregarMecanico(MecanicoID mecanicoID, Nombre nombre, Telefono telefono) {
         Objects.requireNonNull(mecanicoID);
@@ -69,15 +66,23 @@ public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
 
     }
 
+    public void actualizarMarcaVehiculo(VehiculoID vehiculoID, Marca marca){
+        Objects.requireNonNull(vehiculoID);
+        Objects.requireNonNull(marca);
+        appendChange(new MarcaVehiculoActualizado(vehiculoID, marca)).apply();
+    }
+
+    public void actualizarModeloVehiculo(VehiculoID vehiculoID, Modelo modelo) {
+        Objects.requireNonNull(vehiculoID);
+        Objects.requireNonNull(modelo);
+        appendChange(new ModeloVehiculoActualizado(vehiculoID,modelo)).apply();
+    }
+
     public void actualizarEstado(Estado estado) {
         Objects.requireNonNull(estado);
         appendChange(new EstadoActualizado(estado)).apply();
     }
 
-    public void agregarReferenciaTipoProducto(ProductoID productoID, TipoProducto tipoProducto) {
-        Objects.requireNonNull(tipoProducto);
-        appendChange(new ReferenciaProductoAgregada(productoID,tipoProducto)).apply();
-    }
 
     public void actualizarDescripcionProcedimiento(ProcedimientoID procedimientoID, DescripcionProcedimiento descripcionProcedimiento) {
         Objects.requireNonNull(descripcionProcedimiento);
@@ -106,10 +111,6 @@ public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
         return mecanico;
     }
 
-    public List<Producto> productos() {
-        return productos;
-    }
-
     public Set<Procedimiento> procedimientos() {
         return procedimientos;
     }
@@ -117,4 +118,9 @@ public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
     public FacturaID facturaID() {
         return facturaID;
     }
+
+    public Vehiculo vehiculo() {
+        return vehiculo;
+    }
+
 }

@@ -3,6 +3,10 @@ package co.com.sofka.reto.factura;
 import co.com.sofka.domain.generic.EventChange;
 import co.com.sofka.reto.factura.entity.MedioPago;
 import co.com.sofka.reto.factura.events.*;
+import co.com.sofka.reto.fichatecnica.event.MarcaVehiculoActualizado;
+import co.com.sofka.reto.fichatecnica.event.ModeloVehiculoActualizado;
+
+import java.util.ArrayList;
 
 public class FacturaChange extends EventChange {
 
@@ -12,6 +16,7 @@ public class FacturaChange extends EventChange {
             factura.valorTotal = event.getValorTotal();
             factura.facturaID = event.getFacturaID();
             factura.fecha = event.getFecha();
+            factura.productos = new ArrayList<>();
         });
 
         apply((DescuentoMedioPagoAgregado event) -> {
@@ -26,14 +31,6 @@ public class FacturaChange extends EventChange {
              ));
         });
 
-        apply((MarcaVehiculoActualizado event) -> {
-         factura.vehiculo.actualizarMarca(event.getMarca());
-        });
-
-        apply((ModeloVehiculoActualizado event) -> {
-            factura.vehiculo.actualizarModelo(event.getModelo());
-        });
-
         apply((NombreClienteActualizado event) -> {
             factura.cliente.actualizarNombre(event.getNombre());
         });
@@ -44,6 +41,13 @@ public class FacturaChange extends EventChange {
 
         apply((ValorTotalCalculado event) -> {
             factura.valorTotal = event.getValorTotal();
+        });
+
+
+        apply((ReferenciaProductoAgregada event) ->{
+            var producto = factura.getProductoPorID(event.getProductoID())
+                    .orElseThrow(() -> new IllegalArgumentException("No se encuentra el producto"));
+            producto.agregarReferenciaProducto(event.getTipoProducto());
         });
 
     }
