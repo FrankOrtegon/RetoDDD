@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class Cliente extends Entity<ClienteID> {
 
-    private Nombre nombre;
+    public Nombre nombre;
     private Telefono telefono;
 
     public Cliente(ClienteID clienteID, Nombre nombre, Telefono telefono) {

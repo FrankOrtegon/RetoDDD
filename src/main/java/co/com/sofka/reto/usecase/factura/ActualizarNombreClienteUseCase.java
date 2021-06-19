@@ -10,10 +10,9 @@ public class ActualizarNombreClienteUseCase extends UseCase<RequestCommand<Actua
     @Override
     public void executeUseCase(RequestCommand<ActualizarNombreCliente> actualizarNombreClienteRequestCommand) {
         var command = actualizarNombreClienteRequestCommand.getCommand();
-        var factura = Factura.from(command.getFacturaID(), retrieveEvents(command.getFacturaID().value()));
+        var factura = Factura.from(command.getFacturaID(), retrieveEvents());
 
         factura.actualizarNombreCliente(command.getClienteID(), command.getNombre());
         emit().onResponse(new ResponseEvents(factura.getUncommittedChanges()));
     }
-
 }

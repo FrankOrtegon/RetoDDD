@@ -3,10 +3,10 @@ package co.com.sofka.reto.factura;
 import co.com.sofka.domain.generic.EventChange;
 import co.com.sofka.reto.factura.entity.MedioPago;
 import co.com.sofka.reto.factura.events.*;
-import co.com.sofka.reto.fichatecnica.event.MarcaVehiculoActualizado;
-import co.com.sofka.reto.fichatecnica.event.ModeloVehiculoActualizado;
+
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class FacturaChange extends EventChange {
 
@@ -25,21 +25,21 @@ public class FacturaChange extends EventChange {
              if(numDescuentos.equals(2)) {
                  throw new IllegalArgumentException("No se puede agregar mas de dos descuentos a una misma factura");
              }
-             factura.medioPagos.add(new MedioPago(
+             factura.medioPagos = (Set<MedioPago>) new MedioPago(
                      event.getMedioPagoID(),
                      event.getDescuento()
-             ));
+             );
         });
 
         apply((NombreClienteActualizado event) -> {
-            factura.cliente.actualizarNombre(event.getNombre());
+            factura.nombre = event.getNombre();
         });
 
         apply((TelefonoClienteCambiado event) -> {
             factura.cliente.cambiarTelefono(event.getTelefono());
         });
 
-        apply((ValorTotalCalculado event) -> {
+        apply((ValorTotalAgregado event) -> {
             factura.valorTotal = event.getValorTotal();
         });
 

@@ -1,6 +1,7 @@
 package co.com.sofka.reto.fichatecnica.event;
 
 import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofka.reto.fichatecnica.entity.Mecanico;
 import co.com.sofka.reto.fichatecnica.value.MecanicoID;
 import co.com.sofka.reto.valuegeneric.Nombre;
 import co.com.sofka.reto.valuegeneric.Telefono;
@@ -28,4 +29,5 @@ public class MecanicoAgregado extends DomainEvent {
     public Telefono telefono() {
         return telefono;
     }
+
 }

@@ -6,6 +6,7 @@ import co.com.sofka.reto.valuegeneric.Nombre;
 
 public class NombreClienteActualizado extends DomainEvent {
 
+
     private final ClienteID clienteID;
     private final Nombre nombre;
 

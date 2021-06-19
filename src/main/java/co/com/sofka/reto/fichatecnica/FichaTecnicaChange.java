@@ -16,8 +16,6 @@ public class FichaTecnicaChange extends EventChange {
         apply((FichaTecnicaCreada event ) -> {
             fichaTecnica.estado = event.getEstado();
             fichaTecnica.fichaTecnicaID = event.getFichaTecnicaID();
-            fichaTecnica.procedimientos = new HashSet<>();
-
 
         });
 
@@ -26,34 +24,20 @@ public class FichaTecnicaChange extends EventChange {
         });
 
         apply((DescripcionProcedimientoActualizada event) -> {
-           var procedimiento = fichaTecnica.getProcedimientoPorID(event.getProcedimientoID())
-                   .orElseThrow(() -> new IllegalArgumentException("No se encuentra el procedimiento"));
-           procedimiento.actualizarDescripcion(event.getdescripcionProcedimiento());
+            fichaTecnica.procedimientos = event.getdescripcionProcedimiento();
         });
 
         apply((MecanicoAgregado event) -> {
-            var numMecanico = fichaTecnica.mecanico().size();
-            if(numMecanico == 2) {
-                throw new IllegalArgumentException("No se puede agregar mas de un mecanico por ficha tecnica");
-            }
+            fichaTecnica.mecanico = event.mecanicoID();
 
-            fichaTecnica.mecanico.add(new Mecanico(
-                    event.mecanicoID(),
-                    event.nombre(),
-                    event.telefono()
-            ));
         });
 
         apply((NombreMecanicoActualizado event) -> {
-            var nombre = fichaTecnica.getMecanicoPorID(event.getMecanicoID())
-                    .orElseThrow(() -> new IllegalArgumentException("No se encuentra el mecanico"));
-            nombre.actualizarNombre(event.getNombre());
+            fichaTecnica.nombre = event.getNombre();
         });
 
         apply((TelefonoMecanicoCambiado event) -> {
-            var telefono = fichaTecnica.getMecanicoPorID(event.getMecanicoID())
-                    .orElseThrow(() -> new IllegalArgumentException("No se encuentra el mecanico"));
-            telefono.cambiarTelefono(event.getTelefono());
+          fichaTecnica.telefono = event.getTelefono();
         });
 
         apply((MarcaVehiculoActualizado event) -> {

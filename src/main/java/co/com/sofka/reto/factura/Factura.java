@@ -5,12 +5,10 @@ import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.reto.factura.entity.Cliente;
 import co.com.sofka.reto.factura.entity.MedioPago;
 import co.com.sofka.reto.factura.entity.Producto;
-import co.com.sofka.reto.fichatecnica.entity.Procedimiento;
 import co.com.sofka.reto.fichatecnica.entity.Vehiculo;
 import co.com.sofka.reto.factura.events.*;
 import co.com.sofka.reto.factura.values.*;
 
-import co.com.sofka.reto.fichatecnica.value.ProcedimientoID;
 import co.com.sofka.reto.valuegeneric.Nombre;
 import co.com.sofka.reto.valuegeneric.Telefono;
 
@@ -23,6 +21,7 @@ public class Factura extends AggregateEvent<FacturaID> {
 
     public MedioPagoID medioPagoID;
     public Descuento descuento;
+    public Nombre nombre;
     protected FacturaID facturaID;
     protected Fecha fecha;
     protected ValorTotal valorTotal;
@@ -31,9 +30,9 @@ public class Factura extends AggregateEvent<FacturaID> {
     protected Set<MedioPago> medioPagos;
     protected Vehiculo vehiculo;
 
-    public Factura(FacturaID facturaID, Fecha fecha, ValorTotal valorTotal) {
+    public Factura(FacturaID facturaID, Fecha fecha, ValorTotal valorTotal, Cliente cliente) {
         super(facturaID);
-        appendChange(new FacturaCreada(facturaID, fecha, valorTotal)).apply();
+        appendChange(new FacturaCreada(facturaID, fecha, valorTotal, cliente)).apply();
     }
 
     private Factura(FacturaID facturaID) {
@@ -76,7 +75,7 @@ public class Factura extends AggregateEvent<FacturaID> {
     public void calcularValorTotal(FacturaID facturaID, ValorTotal valorTotal) {
         Objects.requireNonNull(facturaID);
         Objects.requireNonNull(valorTotal);
-        appendChange(new ValorTotalCalculado(facturaID,valorTotal)).apply();
+        appendChange(new ValorTotalAgregado(facturaID,valorTotal)).apply();
     }
 
 

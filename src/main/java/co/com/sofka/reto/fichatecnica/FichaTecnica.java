@@ -2,8 +2,6 @@ package co.com.sofka.reto.fichatecnica;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofka.reto.fichatecnica.entity.Mecanico;
-import co.com.sofka.reto.fichatecnica.entity.Procedimiento;
 import co.com.sofka.reto.fichatecnica.entity.Vehiculo;
 import co.com.sofka.reto.fichatecnica.event.*;
 import co.com.sofka.reto.fichatecnica.value.*;
@@ -12,24 +10,24 @@ import co.com.sofka.reto.valuegeneric.Telefono;
 
 import java.util.*;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
 public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
 
     public VehiculoID vehiculoID;
     public Marca marca;
     public FichaTecnicaID fichaTecnicaID;
-    public Vehiculo vehiculo;
+    public Nombre nombre;
+    public Telefono telefono;
+    protected Vehiculo vehiculo;
     protected Estado estado;
-    protected Set<Mecanico> mecanico;
-    protected Set<Procedimiento> procedimientos;
+    protected MecanicoID mecanico;
+    protected DescripcionProcedimiento procedimientos;
     protected FacturaID facturaID;
 
 
     public FichaTecnica(FichaTecnicaID fichaTecnicaID, Estado estado) {
         super(fichaTecnicaID);
-        appendChange(new FichaTecnicaCreada(fichaTecnicaID, estado)).apply();
+        appendChange(new FichaTecnicaCreada(fichaTecnicaID, estado, mecanico, vehiculo)).apply();
     }
 
     private FichaTecnica(FichaTecnicaID fichaTecnicaID) {
@@ -41,20 +39,6 @@ public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
         var fichaTecnica = new FichaTecnica(fichaTecnicaID);
         events.forEach(fichaTecnica::applyEvent);
         return fichaTecnica;
-    }
-
-    public Optional<Mecanico> getMecanicoPorID(MecanicoID mecanicoID) {
-        return mecanico()
-                .stream()
-                .filter(mecanico -> mecanico.identity().equals(mecanicoID))
-                .findFirst();
-    }
-
-    public Optional<Procedimiento> getProcedimientoPorID(ProcedimientoID procedimientoID) {
-        return procedimientos()
-                .stream()
-                .filter(procedimiento -> procedimiento.identity().equals(procedimientoID))
-                .findFirst();
     }
 
 
@@ -107,11 +91,11 @@ public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
         return estado;
     }
 
-    public Set<Mecanico> mecanico() {
+    public MecanicoID mecanico() {
         return mecanico;
     }
 
-    public Set<Procedimiento> procedimientos() {
+    public DescripcionProcedimiento procedimientos() {
         return procedimientos;
     }
 

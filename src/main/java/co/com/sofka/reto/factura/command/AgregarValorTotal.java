@@ -1,13 +1,14 @@
 package co.com.sofka.reto.factura.command;
 
+import co.com.sofka.domain.generic.Command;
 import co.com.sofka.reto.factura.values.FacturaID;
 import co.com.sofka.reto.factura.values.ValorTotal;
 
-public class CalcularValorTotal {
+public class AgregarValorTotal implements Command {
     private final FacturaID facturaID;
     private final ValorTotal valorTotal;
 
-    public CalcularValorTotal(FacturaID facturaID, ValorTotal valorTotal) {
+    public AgregarValorTotal(FacturaID facturaID, ValorTotal valorTotal) {
         this.facturaID = facturaID;
         this.valorTotal = valorTotal;
     }
