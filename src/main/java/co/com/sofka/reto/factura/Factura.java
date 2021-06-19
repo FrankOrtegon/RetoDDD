@@ -29,7 +29,7 @@ public class Factura extends AggregateEvent<FacturaID> {
     protected List<Producto> productos;
     protected Cliente cliente;
     protected Set<MedioPago> medioPagos;
-    protected Vehiculo vehiculo;
+
 
     public Factura(FacturaID facturaID, Fecha fecha, ValorTotal valorTotal, Cliente cliente) {
         super(facturaID);

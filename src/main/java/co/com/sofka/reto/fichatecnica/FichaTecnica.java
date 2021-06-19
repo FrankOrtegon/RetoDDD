@@ -67,7 +67,7 @@ public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
     public void actualizarEstado(FichaTecnicaID fichaTecnicaID, Estado estado) {
         Objects.requireNonNull(estado);
         Objects.requireNonNull(fichaTecnicaID);
-        appendChange(new EstadoActualizado(estado)).apply();
+        appendChange(new EstadoActualizado(fichaTecnicaID,estado)).apply();
     }
 
 
