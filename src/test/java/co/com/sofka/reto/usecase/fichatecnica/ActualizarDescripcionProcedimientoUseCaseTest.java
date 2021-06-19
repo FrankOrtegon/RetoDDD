@@ -38,7 +38,7 @@ public class ActualizarDescripcionProcedimientoUseCaseTest {
         var command = new ActualizarDescripcionProcedimiento(
                 FichaTecnicaID.of("1234"),
                 ProcedimientoID.of("12"),
-                new DescripcionProcedimiento("con toda :)")
+                new DescripcionProcedimiento("Con toda :)")
         );
 
         when(repository.getEventsBy("1234")).thenReturn(events());

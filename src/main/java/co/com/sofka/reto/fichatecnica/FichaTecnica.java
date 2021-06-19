@@ -2,6 +2,7 @@ package co.com.sofka.reto.fichatecnica;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofka.reto.fichatecnica.entity.Mecanico;
 import co.com.sofka.reto.fichatecnica.entity.Vehiculo;
 import co.com.sofka.reto.fichatecnica.event.*;
 import co.com.sofka.reto.fichatecnica.value.*;
@@ -18,21 +19,22 @@ public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
     public FichaTecnicaID fichaTecnicaID;
     public Nombre nombre;
     public Telefono telefono;
+    public Modelo modelo;
     protected Vehiculo vehiculo;
     protected Estado estado;
-    protected MecanicoID mecanico;
+    protected MecanicoID mecanicoID;
     protected DescripcionProcedimiento procedimientos;
     protected FacturaID facturaID;
 
 
-    public FichaTecnica(FichaTecnicaID fichaTecnicaID, Estado estado) {
-        super(fichaTecnicaID);
-        appendChange(new FichaTecnicaCreada(fichaTecnicaID, estado, mecanico, vehiculo)).apply();
-    }
-
     private FichaTecnica(FichaTecnicaID fichaTecnicaID) {
         super(fichaTecnicaID);
         subscribe(new FichaTecnicaChange(this));
+    }
+
+    public FichaTecnica(FichaTecnicaID fichaTecnicaID, Estado estado, MecanicoID mecanico, Vehiculo vehiculo) {
+        super(fichaTecnicaID);
+        appendChange(new FichaTecnicaCreada(fichaTecnicaID, estado, mecanico, vehiculo)).apply();
     }
 
     public static FichaTecnica from(FichaTecnicaID fichaTecnicaID, List<DomainEvent> events) {
@@ -62,8 +64,9 @@ public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
         appendChange(new ModeloVehiculoActualizado(vehiculoID,modelo)).apply();
     }
 
-    public void actualizarEstado(Estado estado) {
+    public void actualizarEstado(FichaTecnicaID fichaTecnicaID, Estado estado) {
         Objects.requireNonNull(estado);
+        Objects.requireNonNull(fichaTecnicaID);
         appendChange(new EstadoActualizado(estado)).apply();
     }
 
@@ -91,8 +94,8 @@ public class FichaTecnica extends AggregateEvent<FichaTecnicaID> {
         return estado;
     }
 
-    public MecanicoID mecanico() {
-        return mecanico;
+    public MecanicoID mecanicoID() {
+        return mecanicoID;
     }
 
     public DescripcionProcedimiento procedimientos() {

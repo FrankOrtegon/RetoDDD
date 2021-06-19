@@ -7,14 +7,14 @@ import co.com.sofka.reto.fichatecnica.value.FichaTecnicaID;
 import co.com.sofka.reto.fichatecnica.value.MecanicoID;
 
 public class FichaTecnicaCreada extends DomainEvent {
-    private final MecanicoID mecanico;
+    private final MecanicoID mecanicoID;
     private final Vehiculo vehiculo;
     private final Estado estado;
     private final FichaTecnicaID fichaTecnicaID;
 
-    public FichaTecnicaCreada(FichaTecnicaID fichaTecnicaID, Estado estado, MecanicoID mecanico, Vehiculo vehiculo) {
+    public FichaTecnicaCreada(FichaTecnicaID fichaTecnicaID, Estado estado, MecanicoID mecanicoID, Vehiculo vehiculo) {
         super("tallercarros.fichatecnica.fichatecnicacreada");
-        this.mecanico = mecanico;
+        this.mecanicoID = mecanicoID;
         this.estado = estado;
         this.fichaTecnicaID = fichaTecnicaID;
         this.vehiculo = vehiculo;
@@ -29,7 +29,7 @@ public class FichaTecnicaCreada extends DomainEvent {
     }
 
     public MecanicoID getMecanico() {
-        return mecanico;
+        return mecanicoID;
     }
 
     public Vehiculo getVehiculo() {

@@ -22,6 +22,7 @@ public class Factura extends AggregateEvent<FacturaID> {
     public MedioPagoID medioPagoID;
     public Descuento descuento;
     public Nombre nombre;
+    public Telefono telefono;
     protected FacturaID facturaID;
     protected Fecha fecha;
     protected ValorTotal valorTotal;

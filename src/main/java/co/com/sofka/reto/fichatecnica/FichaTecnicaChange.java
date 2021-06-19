@@ -28,7 +28,7 @@ public class FichaTecnicaChange extends EventChange {
         });
 
         apply((MecanicoAgregado event) -> {
-            fichaTecnica.mecanico = event.mecanicoID();
+            fichaTecnica.mecanicoID = event.mecanicoID();
 
         });
 
@@ -41,11 +41,11 @@ public class FichaTecnicaChange extends EventChange {
         });
 
         apply((MarcaVehiculoActualizado event) -> {
-            fichaTecnica.vehiculo.actualizarMarca(event.getMarca());
+            fichaTecnica.marca = event.getMarca();
         });
 
         apply((ModeloVehiculoActualizado event) -> {
-            fichaTecnica.vehiculo.actualizarModelo(event.getModelo());
+            fichaTecnica.modelo = event.getModelo();
         });
 
 

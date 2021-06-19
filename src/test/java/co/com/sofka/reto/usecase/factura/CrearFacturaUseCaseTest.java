@@ -1,7 +1,6 @@
 package co.com.sofka.reto.usecase.factura;
 
 import co.com.sofka.business.generic.UseCaseHandler;
-import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.reto.factura.command.CrearFactura;
@@ -19,8 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class CrearFacturaUseCaseTest {
 
@@ -30,14 +27,11 @@ public class CrearFacturaUseCaseTest {
 
     @BeforeEach
     public void setup() {
-
         crearFacturaUseCase = new CrearFacturaUseCase();
-
     }
 
     @Test
     public void crearFacturaHappyPath() {
-
         var command = new CrearFactura(
                 FacturaID.of("24"),
                 new Fecha(18, 06, 2021),

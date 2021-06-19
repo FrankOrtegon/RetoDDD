@@ -1,8 +1,4 @@
 
-{
-Ksrc/main/java/co/com/sofka/reto/fichatecnica/commands/ActualizarEstado.java,7\0\70db04092f48a35269b65bdaaa761e37a9871e63
-v
-Fsrc/main/java/co/com/sofka/reto/fichatecnica/value/FichaTecnicaID.java,8\b\8b692c23434123498f09165ee5ba2bf8e7e084e8
 w
 Gsrc/main/java/co/com/sofka/reto/fichatecnica/value/ProcedimientoID.java,7\8\78abd4eda82a0e1d3a2d5ef5a050f305abe5f1ef
 r
@@ -39,8 +35,6 @@ i
 9src/main/java/co/com/sofka/reto/factura/values/Fecha.java,b\c\bc070e557ad26618cb0005cb380f46b7b19ce083
 r
 Bsrc/main/java/co/com/sofka/reto/fichatecnica/value/VehiculoID.java,5\8\58da2dabd361e0872b99c8295ac2bbf610e24c24
-m
-=src/main/java/co/com/sofka/reto/fichatecnica/value/Marca.java,0\0\00d798c5e813344056afcbf53cf37555a8cf3837
 n
 >src/main/java/co/com/sofka/reto/fichatecnica/value/Modelo.java,3\8\388be2e087943f0ae122620a1880ddcb290e1043
 m
@@ -53,24 +47,16 @@ q
 Asrc/main/java/co/com/sofka/reto/factura/values/ValorProducto.java,5\9\59fc2d81f4b6eefc2bd078a5920215ce42d2062a
 ~
 Nsrc/main/java/co/com/sofka/reto/factura/events/ReferenciaProductoAgregada.java,5\4\5488441269a63abd094e8c6dd2fa09088a723b9b
-ƒ
-Ssrc/main/java/co/com/sofka/reto/fichatecnica/commands/ActualizarModeloVehiculo.java,4\3\43219e73f8b1ecd26688a441a2caf437a0b10d7e
-‚
-Rsrc/main/java/co/com/sofka/reto/fichatecnica/commands/ActualizarMarcaVehiculo.java,f\8\f86df76a9df07501701f2b7fa2360d2a6450a8e9
 l
 <src/main/java/co/com/sofka/reto/factura/entity/Producto.java,1\6\160404a92c23f33a7d07d42c2955f57135c2ec35
 ~
 Nsrc/main/java/co/com/sofka/reto/factura/events/DescuentoMedioPagoAgregado.java,b\3\b32267297e2d60bc1ceccddb3e90b62c69db9eaf
 m
 =src/main/java/co/com/sofka/reto/factura/values/Descuento.java,6\4\642ee37edaeff6497cfd9b5e5994effc51ff940b
-m
-=src/main/java/co/com/sofka/reto/factura/values/FacturaID.java,0\9\09a97e353a9f023c534fcef4b4d556496984c20e
 |
 Lsrc/main/java/co/com/sofka/reto/factura/events/NombreClienteActualizado.java,e\8\e86b01bb0532dded6a81a255a275d7fb1359e890
 k
 ;src/main/java/co/com/sofka/reto/factura/entity/Cliente.java,7\5\753d7d234809c992b8d0816b1d402e1404e63e04
-q
-Asrc/main/java/co/com/sofka/reto/factura/events/FacturaCreada.java,a\2\a27a26bd5ad08957753124876da43623d617f6c4
 ƒ
 Ssrc/main/java/co/com/sofka/reto/fichatecnica/commands/ActualizarNombreMecanico.java,6\e\6e34feb716315435a6c0238110eff11f23d2ef7f
 
