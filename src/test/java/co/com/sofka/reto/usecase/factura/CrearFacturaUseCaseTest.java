@@ -34,12 +34,12 @@ public class CrearFacturaUseCaseTest {
     public void crearFacturaHappyPath() {
         var command = new CrearFactura(
                 FacturaID.of("24"),
-                new Fecha(18, 06, 2021),
+                new Fecha(19, 06, 2021),
                 new ValorTotal(15000.0),
                 new Cliente(
                         new ClienteID("1"),
                         new Nombre("Juan"),
-                        new Telefono("2345436546"))
+                        new Telefono("123456"))
         );
 
         var response = UseCaseHandler.getInstance().syncExecutor(
@@ -49,9 +49,10 @@ public class CrearFacturaUseCaseTest {
         List<DomainEvent> events = response.getDomainEvents();
 
         FacturaCreada facturaCreada = (FacturaCreada) events.get(0);
-        //Assertions.assertEquals("24", facturaCreada.getFacturaID().value());
-        Assertions.assertEquals(18, 06, 2021, facturaCreada.getFecha().value());
+        Assertions.assertEquals(19, 06, 2021, facturaCreada.getFecha().value());
         Assertions.assertEquals(15000.0, facturaCreada.getValorTotal().value());
+        Assertions.assertEquals("Juan", facturaCreada.getCliente().nombre().value());
+        Assertions.assertEquals("123456", facturaCreada.getCliente().telefono().value());
 
     }
 }

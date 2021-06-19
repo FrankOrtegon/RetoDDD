@@ -1,15 +1,14 @@
-package co.com.sofka.reto.factura.events;
+package co.com.sofka.reto.factura.command;
 
-import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofka.domain.generic.Command;
 import co.com.sofka.reto.factura.values.FacturaID;
 import co.com.sofka.reto.factura.values.ValorTotal;
 
-public class ValorTotalAgregado extends DomainEvent {
+public class ActualizarValorTotal implements Command {
     private final FacturaID facturaID;
     private final ValorTotal valorTotal;
 
-    public ValorTotalAgregado(FacturaID facturaID, ValorTotal valorTotal) {
-        super("tallercarros.factura.valortotalcalculado");
+    public ActualizarValorTotal(FacturaID facturaID, ValorTotal valorTotal) {
         this.facturaID = facturaID;
         this.valorTotal = valorTotal;
     }

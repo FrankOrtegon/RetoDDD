@@ -39,7 +39,7 @@ public class FacturaChange extends EventChange {
             factura.telefono = event.getTelefono();
         });
 
-        apply((ValorTotalAgregado event) -> {
+        apply((ValorTotalActualizado event) -> {
             factura.valorTotal = event.getValorTotal();
         });
 
